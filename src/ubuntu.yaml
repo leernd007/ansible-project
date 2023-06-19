@@ -1,0 +1,21 @@
+- name: Setup Nginx for Ubuntu
+  hosts: webservers
+  become: yes
+  vars:
+    src: webapp/
+    dest: /var/www/html
+  tasks:
+    - name: Install Nginx on Ubuntu
+      apt:
+        name: nginx
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+    - name: Copy project
+      copy:
+        src: "{{src}}"
+        dest: "{{dest}}"
+      when: ansible_distribution == "Ubuntu"
+    - name: Print OS
+      debug:
+        var: ansible_distribution
+      when: ansible_distribution == "Ubuntu"

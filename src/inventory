@@ -1,5 +1,5 @@
-web01 ansible_host=192.168.10.192
-web02 ansible_host=192.168.10.193
+web01 ansible_host=192.168.10.194
+web02 ansible_host=192.168.10.195
 
 [webservers]
 web01
