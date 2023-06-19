@@ -1,0 +1,35 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create key pair
+      ec2_key:
+        name: ansible_key_pair
+        region: us-east-1
+      register: keyout
+    - name: save key
+      copy:
+        content: "{{keyout.key.private_key}}"
+        dest: ./ansible_key_pair.pem
+      when: keyout.changed
+    - name: Check if instance exists
+      ec2_instance_info:
+        region: us-east-1
+        filters:
+          "tag:Name": created_by_ansible
+      ignore_errors: true
+      register: existing_instances
+    - name: Create EC2 instance
+      ec2_instance:
+        key_name: ansible_key_pair
+        instance_type: t2.micro
+        image:
+          id: ami-053b0d53c279acc90
+        region: us-east-1
+        wait: yes
+        exact_count: 1
+        tags:
+          Name: created_by_ansible
+      when: existing_instances.instances | length == 0
+    - name: Instances
+      debug:
+        var: existing_instances
