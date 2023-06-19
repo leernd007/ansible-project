@@ -1,3 +1,5 @@
+[b]Create EC2 instance[b]
+
 ansible-playbook aws.yml
 
 export AWS_ACCESS_KEY_ID='AAA'
