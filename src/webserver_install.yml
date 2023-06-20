@@ -1,4 +1,0 @@
-- name: Include ubuntu play
-  import_playbook: ubuntu.yaml
-- name: Include fedora play
-  import_playbook: fedora.yaml
