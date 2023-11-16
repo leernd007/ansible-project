@@ -10,12 +10,20 @@
         name: nginx
         state: present
         update_cache: yes
+      register: serverout
       when: ansible_distribution == "Fedora"
+
+    - name: Print Output
+      debug:
+        var: serverout
+      when: ansible_distribution == "Fedora"
+
     - name: Clear nginx folder
       ansible.builtin.file:
         state: absent
         path: /usr/share/nginx/html/
       when: ansible_distribution == "Fedora"
+
     - name: Open the firewall for Nginx (Fedora)
       ansible.builtin.shell: |
         firewall-cmd --permanent --add-service=http
@@ -23,6 +31,7 @@
         firewall-cmd --reload
         exit 0
       when: ansible_distribution == "Fedora"
+
     - name: Copy project
       copy:
         src: "{{src}}"
@@ -33,6 +42,7 @@
         name: nginx
         state: started
       when: ansible_distribution == "Fedora"
+
     - name: Print OS
       debug:
         var: ansible_distribution

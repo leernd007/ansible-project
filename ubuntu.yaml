@@ -10,12 +10,20 @@
         name: nginx
         state: latest
         update_cache: yes
+      register: serverout
       when: ansible_distribution == "Ubuntu"
+
+    - name: Print Output
+      debug:
+        var: serverout
+      when: ansible_distribution == "Ubuntu"
+
     - name: Copy project
       copy:
         src: "{{src}}"
         dest: "{{dest}}"
       when: ansible_distribution == "Ubuntu"
+
     - name: Print OS
       debug:
         var: ansible_distribution
