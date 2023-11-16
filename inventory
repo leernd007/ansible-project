@@ -1,0 +1,12 @@
+web01 ansible_host=18.184.220.151
+web01 ansible_user=ubuntu
+
+web02 ansible_host=3.79.231.172
+web02 ansible_user=fedora
+
+[webservers]
+web01
+web02
+
+[webservers:vars]
+ansible_ssh_private_key_file=dist.pem
