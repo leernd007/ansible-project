@@ -1,19 +1,16 @@
- (status)
+status
 ```
 ansible -i inventory -m ping webservers
 ```
-
-(check playbook syntax)
+check playbook syntax
 ```
 ansible-playbook webserver_install.yml -i inventory --syntax-check
 ```
-
-(run tasks)
+run tasks
 ```
 ansible-playbook -i inventory webserver_install.yml
 ```
-
-(show config list)
+show config list
 ```
 ansible -m setup web01
 ```
