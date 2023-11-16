@@ -5,6 +5,18 @@
     src: webapp/
     dest: /var/www/html
   tasks:
+    - name: Install packages
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      loop:
+        - wget
+        - curl
+        - zip
+        - unzip
+      when: ansible_distribution == "Ubuntu"
+
     - name: Install Nginx on Ubuntu
       apt:
         name: nginx

@@ -1,7 +1,7 @@
-web01 ansible_host=18.159.214.247
+web01 ansible_host=18.184.74.89
 web01 ansible_user=ubuntu
 
-web02 ansible_host=3.65.199.53
+web02 ansible_host=3.79.239.157
 web02 ansible_user=fedora
 
 [webservers]

@@ -5,6 +5,19 @@
     src: webapp/
     dest: /usr/share/nginx/html
   tasks:
+    -
+    - name: Install packages
+      dnf:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      loop:
+        - wget
+        - curl
+        - zip
+        - unzip
+      when: ansible_distribution == "Fedora"
+
     - name: Install Nginx on Fedora
       dnf:
         name: nginx
@@ -37,6 +50,7 @@
         src: "{{src}}"
         dest: "{{dest}}"
       when: ansible_distribution == "Fedora"
+
     - name: start nginx
       service:
         name: nginx
